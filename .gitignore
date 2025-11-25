@@ -1,0 +1,60 @@
+venv/
+# --- Python ---
+__pycache__/
+calibration_images/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+
+# --- Virtual env ---
+venv/
+.env/
+.venv/
+
+# --- Jupyter / IPython ---
+.ipynb_checkpoints/
+
+# --- Log / temp ---
+*.log
+*.tmp
+*.temp
+
+# --- Config locali ---
+*.env
+*.ini
+*.cfg
+*.local
+
+# --- Build / packaging ---
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# --- IDE ---
+.vscode/
+.idea/
+
+# --- Immagini (per evitare di committare dataset o file media) ---
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.tiff
+*.gif
+
+# --- Video ---
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# --- Altro media ---
+*.wav
+*.mp3
+
+# --- MacOS / Windows ---
+.DS_Store
+Thumbs.db
