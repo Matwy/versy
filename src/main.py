@@ -7,22 +7,28 @@ detector = ArucoDetector()
 
 count = 0
 
-while True:
-    frame = robot.get_frame()
-    results = detector.detect(frame, show=True)
+try:
+    while True:
+        frame = robot.get_frame()
+        if frame is None:
+            continue
 
-    if results:
-        marker = results[0]
-        print("Posizione XYZ:", marker["tvec"])
-        print("Distanza:", marker["distance"])
+        results = detector.detect(frame, show=True)
 
-    cv2.imshow("frame", frame)
+        if results:
+            marker = results[0]
+            print("Posizione XYZ:", marker["tvec"])
+            print("Distanza:", marker["distance"])
 
-    key = cv2.waitKey(1) & 0xFF
-    if key == ord("p"):
-        count += 1
-        cv2.imwrite((str(count)), frame)
+        cv2.imshow("frame", frame)
 
-    if key == ord("q"):
-        cv2.destroyAllWindows()
-        break
+        key = cv2.waitKey(1) & 0xFF
+        if key == ord("p"):
+            count += 1
+            cv2.imwrite(f"capture_{count}.png", frame)
+
+        if key == ord("q"):
+            break
+finally:
+    robot.stop()
+    cv2.destroyAllWindows()

@@ -163,21 +163,24 @@ if __name__ == "__main__":
     print("="*60)
     print("CALIBRAZIONE CAMERA PER ARUCO POSE ESTIMATION")
     print("="*60)
-    
 
     robot = Robot()
-    while True:
-        print("\nMENU:")
-        print("1. Cattura immagini dalla webcam")
-        print("2. Esegui calibrazione")
-        print("0. Esci")
-        choice = input("\nScegli: ")
-        if choice == '1':
-            capture_calibration_images()
-        elif choice == '2':
-            calibrate_camera()
-        elif choice == '0':
-            print("Ciao!")
-            break
-        else:
-            print("Scelta non valida")
+    try:
+        while True:
+            print("\nMENU:")
+            print("1. Cattura immagini dalla webcam")
+            print("2. Esegui calibrazione")
+            print("0. Esci")
+            choice = input("\nScegli: ")
+            if choice == '1':
+                capture_calibration_images()
+            elif choice == '2':
+                calibrate_camera()
+            elif choice == '0':
+                print("Ciao!")
+                break
+            else:
+                print("Scelta non valida")
+    finally:
+        robot.stop()
+        cv2.destroyAllWindows()
