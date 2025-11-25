@@ -30,6 +30,16 @@ class ArucoDetector:
         # Dizionario ArUco
         self.aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
         self.parameters = aruco.DetectorParameters()
+        # self.parameters.adaptiveThreshWinSizeMin = 3
+        # self.parameters.adaptiveThreshWinSizeMax = 30
+        # self.parameters.adaptiveThreshWinSizeStep = 5
+        # self.parameters.minMarkerPerimeterRate = 0.05
+        # self.parameters.maxMarkerPerimeterRate = 6.0
+        # self.parameters.polygonalApproxAccuracyRate = 0.03
+        # self.parameters.cornerRefinementMethod = aruco.CORNER_REFINE_APRILTAG
+        # self.parameters.cornerRefinementWinSize = 7
+        # self.parameters.cornerRefinementMaxIterations = 50
+
         self.detector = aruco.ArucoDetector(self.aruco_dict, self.parameters)
 
         # Carico calibrazione camera
@@ -64,7 +74,6 @@ class ArucoDetector:
         results = []
 
         if ids is not None:
-            out = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
             aruco.drawDetectedMarkers(frame, corners, ids)
             # Stima pose
             rvecs, tvecs, _ = aruco.estimatePoseSingleMarkers(

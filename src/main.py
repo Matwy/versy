@@ -1,5 +1,5 @@
 from Robot.Robot import Robot
-from vision.codereader import ArucoDetector
+from vision.aruco import ArucoDetector
 import cv2
 
 robot = Robot()
@@ -23,9 +23,6 @@ try:
         cv2.imshow("frame", frame)
 
         key = cv2.waitKey(1) & 0xFF
-        if key == ord("p"):
-            count += 1
-            cv2.imwrite(f"capture_{count}.png", frame)
 
         if key == ord("q"):
             break

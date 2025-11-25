@@ -1,13 +1,12 @@
 import cv2
 
-
 class CV2CameraStream:
     """Fallback camera stream using cv2.VideoCapture for PC"""
 
     # Stesse impostazioni di PiCameraStream
-    DEFAULT_RESOLUTION = (320*2, 240*2)
+    DEFAULT_RESOLUTION = (320*3, 240*2)
 
-    def __init__(self, camera_index: int = 0, resolution: tuple = DEFAULT_RESOLUTION):
+    def __init__(self, camera_index: int = 1, resolution: tuple = DEFAULT_RESOLUTION):
         self.cap = cv2.VideoCapture(camera_index)
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[0])
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution[1])

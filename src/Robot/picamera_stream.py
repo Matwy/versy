@@ -11,10 +11,10 @@ class PiCameraStream:
 
     def __init__(
         self,
-        resolution: Tuple[int, int] = (640, 480),
-        brightness: Optional[float] = None,
+        resolution: Tuple[int, int] = (320, 240),
+        brightness: Optional[float] = -0.2,
         hflip: bool = False,
-        vflip: bool = True,
+        vflip: bool = False, # aruco detection non funziona se flippi 
     ):
         self._stopped = False
         self._frame = None
@@ -31,24 +31,20 @@ class PiCameraStream:
                 full_fov_mode = mode
                 break
 
-        # Configurazione video: stream "main" in BGR (perfetto per OpenCV)
-        # buffer_count=6 è quello tipico per use-case video.
         config = self.cam.create_video_configuration(
-            main={"size": resolution, "format": "RGB888"}, 
+            main={"size": resolution, "format": "BGR888"}, 
             sensor={
                 'output_size': full_fov_mode['size'],  # Forza il sensor mode con full FOV
                 'bit_depth': full_fov_mode['bit_depth']
             },
         )
 
-        # Flip opzionale (equivalente di rotation/flip delle vecchie API)
         if hflip or vflip:
             from libcamera import Transform
             config["transform"] = Transform(hflip=int(hflip), vflip=int(vflip))
 
         self.cam.configure(config)
 
-        # Imposta luminosità se fornita (ATTENZIONE: non è una scala 0-100)
         if brightness is not None:
             self.cam.set_controls({"Brightness": float(brightness)})
 
