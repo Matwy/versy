@@ -1,4 +1,5 @@
 import time
+from .motors import Motors
 
 # Try to import PiCamera, fallback to cv2 if not available
 try:
@@ -18,6 +19,7 @@ class Robot:
             self.cam_stream = CV2CameraStream(camera_index)
 
         self.cam_stream.start()
+        self.motorsObj = Motors()
         time.sleep(1)
 
     def get_frame(self):
@@ -25,3 +27,6 @@ class Robot:
 
     def stop(self):
         self.cam_stream.stop()
+    
+    def motors(self, power1, power2, power3):
+        self.motorsObj.set_speeds(power1, power2, power3)

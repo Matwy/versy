@@ -1,8 +1,10 @@
-from Robot.Robot import Robot
+from robot.robot import Robot
 from vision.aruco import ArucoDetector
 import cv2
 
 robot = Robot()
+robot.motors(0, 0, 0)
+exit()
 detector = ArucoDetector()
 
 count = 0
