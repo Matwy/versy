@@ -2,6 +2,7 @@ venv/
 # --- Python ---
 __pycache__/
 calibration_images/
+camera_calibration.npz
 *.py[cod]
 *.pyo
 *.pyd
